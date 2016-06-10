@@ -8,5 +8,7 @@ class Welcome(Controller):
         self.db = self._app.db
 
     def index(self):
+        return self.load_view('welcome.html')
 
-        return self.load_view('index.html')
+    def display_login_reg(self):
+        return self.load_view('loginreg.html')
