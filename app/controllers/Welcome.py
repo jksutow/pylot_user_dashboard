@@ -11,4 +11,10 @@ class Welcome(Controller):
         return self.load_view('welcome.html')
 
     def display_login_reg(self):
+        # Flash errors
+        if 'val_errors' in session:
+            for error in session['val_errors']:
+                flash (error)
+            #clear val erorrs on a page refresh
+            session.pop('val_errors')
         return self.load_view('loginreg.html')

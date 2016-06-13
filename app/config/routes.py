@@ -2,7 +2,10 @@ from system.core.router import routes
 
 routes['GET']['/'] = 'Welcome#index'
 routes['GET']['/login_reg'] = 'Welcome#display_login_reg'
-
+routes['POST']['/login'] = 'Users#login'
+routes['POST']['/register'] = 'Users#register'
+# dashboard is to show every user
+routes['GET']['/dashboard'] = 'Users#index'
 """
 
     routes['VERB']['/URL/GOES/HERE'] = 'Controller#method'
