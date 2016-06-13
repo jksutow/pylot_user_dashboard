@@ -10,6 +10,14 @@
     <div class="container">
       <header>
         <h1>Survey Form</h1>
+        <!-- if user is logged in, display nav bar so they can log out -->
+        {% if 'user' in session %}
+        <nav>
+          <ul class="nav nav-tabs">
+            <li role="presentation"><a href="/logout">Logout</a></li>
+          </ul>
+        </nav>
+        {% endif %}
       </header>
       {% block body %} {% endblock %}
     </div>

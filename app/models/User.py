@@ -1,7 +1,6 @@
 from system.core.model import Model
 #import for email regex
 import re
-from flask.ext.bcrypt import Bcrypt
 # regex for email
 EMAIL_REGEX = re.compile(r'^[a-za-z0-9\.\+_-]+@[a-za-z0-9\._-]+\.[a-za-z]*$')
 
@@ -72,8 +71,6 @@ class User(Model):
         return self.fetch_user_by_id(result)
 
     def validate_reg_info(self, form_data):
-
-        return self.register(form_data)
         errors = []
 
         # Validate the following data:

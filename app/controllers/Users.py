@@ -35,6 +35,10 @@ class Users(Controller):
         return self.handle_login_reg_response(login_result)
         return redirect('/login_reg')
 
+    def logout(self):
+        session.clear()
+        return redirect('/')
+        
     def set_user_session(self, validation_result):
         session['user'] = validation_result
         return
