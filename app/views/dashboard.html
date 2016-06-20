@@ -1,5 +1,45 @@
 <!-- contains layout.html file -->
 {% extends "layout.html" %}
 {% block body %}
-Dashboard. Logged in user is {{session['user']}}
+<div class="row">
+  <h1>Manage Users</h1>
+  <a href="/users/new">ADD NEW</a>
+  <div class="container">
+    <table class = "table table-striped">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Created At</th>
+          <th>Admin Level</th>
+          <!-- actions depend on admin level -->
+          {% if session['user']['admin_level'] == 1 %}
+          <th>Actions</th>
+          {% endif %}
+        </tr>
+      </thead>
+      <tbody>
+        {% for user in users %}
+          <tr>
+            <td>{{user['id']}}</td>
+            <td> <a href="/users/{{user['id']}}">{{user['name']}}</a></td>
+            <td>{{user['email']}}</td>
+            <td>{{user['created_at']}}</td>
+            <td>{{user['admin_level']}}</td>
+            {% if session['user']['admin_level'] == 1 %}
+            <th>
+              <a href="/users/edit/{{user['id']}}">Edit</a> |
+              <a href="/users/destroy/{{user['id']}}">Delete</a>
+            </th>
+            {% endif %}
+          </tr>
+        {% endfor %}
+
+      </tbody>
+    </table>
+
+  </div>
+</div>
+
 {% endblock %}

@@ -1,5 +1,22 @@
 <!-- contains layout.html file -->
 {% extends "layout.html" %}
 {% block body %}
-
+<h1>Edit User {{user['id']}}</h1>
+<p>Edit Information</p>
+<form class = "edit_user" action="/users/edit/{{user['id']}}" method="post">
+  Name: <input type="text" name="name" value="{{user['name']}}">
+  Email Address: <input type="text" name="email" value="{{user['email']}}">
+  User Level:<br>
+  <select name="admin_level">
+    <option value="0">Normal</option>
+    <option value="1">Admin</option>
+  </select>
+  <input type="submit" value="Save">
+</form><br>
+<p>Change Password:</p>
+<form class="update_pw" action="/users/edit/{{user['id']}}" method="post">
+  Password: <input type="password" name="password">
+  Password Confirm: <input type="password" name="password_confirm">
+  <input type="submit" value="Update Password">
+</form>
 {% endblock %}

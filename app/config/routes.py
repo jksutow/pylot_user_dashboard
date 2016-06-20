@@ -8,7 +8,14 @@ routes['POST']['/login'] = 'Users#login'
 routes['GET']['/logout'] = 'Users#logout'
 routes['POST']['/register'] = 'Users#register'
 # dashboard is to show every user
+routes['GET']['/users/new'] = 'Users#new'
 routes['GET']['/dashboard'] = 'Users#index'
+routes['GET']['/users/<int:id>'] = 'Users#show'
+routes['GET']['/users/edit/<int:id>'] = 'Users#edit'
+routes['POST']['/users/edit/<int:id>'] = 'Users#update'
+routes['GET']['/users/destroy/<int:id>'] = 'Users#delete_user'
+routes['POST']['/messages'] = 'Messages#create'
+routes['POST']['/users/<int:id>/comments'] = 'Messages#create_comment'
 
 """
 

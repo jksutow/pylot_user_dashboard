@@ -1,5 +1,32 @@
 <!-- contains layout.html file -->
 {% extends "layout.html" %}
 {% block body %}
+<div class="jumbotron">
+  <h1>{{user['name']}}'s page!</h1>
+  <h1>{{user['email']}}</h1>
+</div>
+<p>Leave a message for {{user['name']}}</p>
+<form action="/messages" method="post">
+  <input type="hidden" name="user_id" value="{{user['id']}}">
+  <textarea name="message" rows="8" cols="40"></textarea>
+  <input type="submit" value="Post">
+</form>
+
+<h1>Messages:</h1>
+{% for message in messages %}
+  <h2>{{message['message_author']}} writes:</h2>
+  <p>{{message['message']}}</p>
+  <h3>Comments</h3>
+{% for idx in range(message['msg_comments']|length)%}
+<p>Author: {{message['comment_author'][idx]}}</p>
+<p>Comment: {{message['msg_comments'][idx]}}</p>
+{% endfor %}
+  <h3>Leave a comment on {{message['message_author']}}'s message</h3>
+  <form action="{{user['id']}}/comments" method="post">
+    <input type="hidden" name="message_id" value="{{message['message_id']}}">
+    <textarea name="comment" rows="8" cols="40"></textarea>
+    <input type="submit" value="Post">
+  </form>
+{% endfor %}
 
 {% endblock %}

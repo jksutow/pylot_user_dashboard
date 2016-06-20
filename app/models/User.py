@@ -21,8 +21,27 @@ class User(Model):
         self.queries = {
             'get_user_by_email': "SELECT * FROM users WHERE email = :email LIMIT 1",
             'create_user': "INSERT INTO users (name, email, pw_hash, created_at, updated_at) VALUES (:name, :email, :pw_hash, NOW(), NOW())",
-            'fetch_user_by_id': "SELECT id, name, email FROM users WHERE id = :id "
+            'fetch_user_by_id': "SELECT id, name, email, admin_level FROM users WHERE id = :id ",
+            'fetch_all_users': "SELECT id, name, email, admin_level, created_at FROM users WHERE id != :id",
+            'update_user': "UPDATE users SET name = :name, email = :email, admin_level = :admin_level WHERE id = :id ",
+            'delete_user': "DELETE FROM users WHERE id = :id"
         }
+    def delete_user(self, id):
+        query = self.queries['delete_user']
+        data = {
+            'id': id
+        }
+        result = self.db.query_db(query, data)
+        return result
+
+    def fetch_all_users(self, id):
+        query = self.queries['fetch_all_users']
+        data = {
+            'id': id
+        }
+        result = self.db.query_db(query, data)
+        return result
+
     def fetch_user_by_id(self, id):
         query = self.queries['fetch_user_by_id']
         data = {
@@ -44,7 +63,8 @@ class User(Model):
             return {
                 'id': result[0]['id'],
                 'name': result[0]['name'],
-                'email': result[0]['email']
+                'email': result[0]['email'],
+                'admin_level': result[0]['admin_level']
             }
 
     def get_user_by_email(self, email):
@@ -69,6 +89,17 @@ class User(Model):
         result = self.db.query_db(query, data)
 
         return self.fetch_user_by_id(result)
+
+    def update_user_by_id(self, id, form_data):
+        query = self.queries['update_user']
+        data = {
+            'id': id,
+            'name': form_data['name'],
+            'email': form_data['email'],
+            'admin_level': form_data['admin_level']
+        }
+        result = self.db.query_db(query, data)
+        return result
 
     def validate_reg_info(self, form_data):
         errors = []

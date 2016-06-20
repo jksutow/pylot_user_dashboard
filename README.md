@@ -22,3 +22,10 @@ What do we need for this project?
       * Register (testing inputs)
     * Register (add new user)
     * Login (retrieve user by email)
+    * logout
+
+  * Show all users on dashboard
+    * Dashboard view
+    * Grab all users from Database, send them to dashboard.html
+  * Click single user to travel to details/show page
+  * Create messages
